@@ -96,6 +96,7 @@ define(['tppl', 'events', 'helper'], function(tpl, events, helper) {
 				arrayName && (addInfo[arrayName] = i);
 				var child = children[i];
 				render(child, addInfo);
+				delete(addInfo[arrayName]);
 			}
 		}
 
