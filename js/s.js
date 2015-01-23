@@ -80,7 +80,9 @@ define(['tppl', 'events', 'helper'], function(tpl, events, helper) {
 
 					break;
 				case 'text':
-					addBindInfo(node, bindInfo, addInfo);
+					var value = addBindInfo(node, bindInfo, addInfo);
+					node.innerHTML = eval(value);
+
 					recurse = false;
 					break;
 			}
