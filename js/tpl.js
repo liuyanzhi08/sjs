@@ -12,6 +12,7 @@ define(function() {
         if (!fn.body) {
             fn.body = 'return ';
             str = str.replace(/{(.*?)}/g, '"+$1+"');
+            str = str.replace(/(^\s*|\s*$)/g, ''); // Trim white space on line start and end
             str = str.substring(2, str.length-2);
             fn.body += str;
         } 

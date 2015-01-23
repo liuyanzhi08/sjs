@@ -1,9 +1,44 @@
 <html>
 	<head></head>
 	<body>
-		<div data-model="test">{this.name}, score: {this.score}</div>
-		<div data-model="test1">{name}, score: {score}</div>
-	</body>
+		<div data-bind="model: test">
+			<span data-bind="text: id"></span>
+			<span data-bind="text: name"></span><br>
+			
+			<p>Total blogs num:<span data-bind="text: blogsNum"></span></p>
+			<table>
+				<thead>
+					<tr>
+						<td>id</td>
+						<td>name</td>
+						<td>comments</td>
+					</tr>
+				</thead>
+				<tbody data-bind="foreach: blogs">
+					<tr>
+						<td data-bind="text: id"></td>
+						<td data-bind="text: name"></td>
+						<td>
+							<ul data-bind="foreach: blogs-comments">
+								<li>
+									<span>Total comments num:</span>
+									<span data-bind="text: blog-commentsNum"></span><br>
 
-	<script type="text/javascript" src="js/require.js" data-main="js/main.js"></script>
+									<span data-bind="text: id"></span>
+									<span data-bind="text: name"></span><br>
+
+									<span data-bind="text: blogs-id"></span>
+									<span data-bind="text: blogs-name"></span><br>
+
+									<span data-bind="text: blogs-comments-id"></span>
+									<span data-bind="text: blogs.comments.name"></span>
+								</li>
+							</ul>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<script type="text/javascript" src="js/require.js" data-main="js/main.js"></script>
+	</body>
 </html>
