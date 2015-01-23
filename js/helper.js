@@ -1,4 +1,5 @@
 define(function() {
+	'use strict'
 	return {
 		repeat: function(str, times) {
 			var ret = '';
@@ -7,5 +8,11 @@ define(function() {
 			}
 			return ret;
 		}
+		// ,
+		// extend: function(target, from) {
+		// 	for (var key in from) {
+		// 		target[key] = from[key];
+		// 	}
+		// }
 	}
 })

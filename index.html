@@ -11,6 +11,8 @@
 					<tr>
 						<td>id</td>
 						<td>name</td>
+						<td>blog_id</td>
+						<td>blog_name</td>
 						<td>comments</td>
 					</tr>
 				</thead>
@@ -18,11 +20,13 @@
 					<tr>
 						<td data-bind="text: id"></td>
 						<td data-bind="text: name"></td>
+						<td data-bind="text: blogs-id"></td>
+						<td data-bind="text: blogs-name"></td>
 						<td>
 							<ul data-bind="foreach: blogs-comments">
 								<li>
 									<span>Total comments num:</span>
-									<span data-bind="text: blog-commentsNum"></span><br>
+									<span data-bind="text: blogs-commentsNum"></span><br>
 
 									<span data-bind="text: id"></span>
 									<span data-bind="text: name"></span><br>
@@ -31,7 +35,7 @@
 									<span data-bind="text: blogs-name"></span><br>
 
 									<span data-bind="text: blogs-comments-id"></span>
-									<span data-bind="text: blogs.comments.name"></span>
+									<span data-bind="text: blogs-comments-name"></span>
 								</li>
 							</ul>
 						</td>

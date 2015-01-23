@@ -12,8 +12,28 @@ define(['s'], function(s) {
 					{id: 0, name: 'comment'},
 					{id: 1, name: 'comment1'},
 					{id: 2, name: 'comment2'}
-				]},
-			{id: 1, name: 'blog1'}
+				]
+			},
+			{
+				id: 0, 
+				name: 'blog', 
+				commentsNum: 3,
+				comments: [
+					{id: 0, name: 'comment'},
+					{id: 1, name: 'comment1'},
+					{id: 2, name: 'comment2'}
+				]
+			},
+			{
+				id: 0, 
+				name: 'blog', 
+				commentsNum: 3,
+				comments: [
+					{id: 0, name: 'comment'},
+					{id: 1, name: 'comment1'},
+					{id: 2, name: 'comment2'}
+				]
+			}
 		]
 	})
 

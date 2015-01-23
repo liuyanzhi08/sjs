@@ -10,7 +10,7 @@ define(['tppl', 'events', 'helper'], function(tpl, events, helper) {
 	 * Init the app
 	 */
 	s.init = function() {
-		render(document.body);
+		render(document.body, addInfo);
 
 		for (name in s.models) {
 			// Init view
@@ -57,38 +57,44 @@ define(['tppl', 'events', 'helper'], function(tpl, events, helper) {
 	/**
 	 * Update view
 	 */
-	var modelName;
-	function render(node) {
+	var addInfo = {};
+	function render(node, addInfo) {
 		var bindInfo = getBindInfo(node);
+		var recurse = true;
+		var arrayName = '';
+
 		if (bindInfo) {
 			switch (bindInfo.type) {
 				case 'model':
-					modelName = bindInfo.name;
+					addInfo['model'] = bindInfo.name;
 					break;
 				case 'foreach':
-					addPrefix(node, bindInfo);
-
 					var varNames = bindInfo.name.split('-');
-					varNames.unshift(modelName);
-					var varStr = varNames.join('"]["');
-					varStr = 's.models["' + varStr + '"]';
-					var varValue = eval(varStr);
-					console.log(varValue);
-					node.innerHTML = helper.repeat(node.innerHTML, varValue.length);
+					arrayName = varNames[varNames.length -1 ];
+
+					var arr = addBindInfo(node, bindInfo, addInfo);
+
+					// Get array value of model
+					var arrValue = eval(arr);
+					node.innerHTML = helper.repeat(node.innerHTML, arrValue.length);
+
 					break;
 				case 'text':
-					addPrefix(node, bindInfo);
+					addBindInfo(node, bindInfo, addInfo);
+					recurse = false;
 					break;
 			}
 		}
-
 		// Recurse
-		var children = node.children;
-		if (!children) return;
+		if (recurse) {
+			var children = node.children;
+			if (!children) return;
 
-		for (var i = 0, len = children.length; i < len; i++) {
-			var child = children[i];
-			render(child);
+			for (var i = 0, len = children.length; i < len; i++) {
+				arrayName && (addInfo[arrayName] = i);
+				var child = children[i];
+				render(child, addInfo);
+			}
 		}
 
 	}
@@ -116,8 +122,22 @@ define(['tppl', 'events', 'helper'], function(tpl, events, helper) {
 	 * @param {dom} node     Node to add
 	 * @param {object} bindInfo Bindinfo object
 	 */
-	function addPrefix(node, bindInfo) {
-		node.dataset.bind = bindInfo.type + ': ' + modelName + '-' + bindInfo.name;
+	function addBindInfo(node, bindInfo, addInfo) {
+		var name = bindInfo.name;
+		name = name.replace(/([^-\s]+)(-|\b)/g, "['$1']");
+
+		var key, value,  ret;
+		for (key in addInfo) {
+			if (key == 'model') continue;
+
+			value = addInfo[key]; 
+			name = name.replace("'" + key + "'", "'" + key + "']['" + value + "'");
+		}
+		ret = "s.models['" + addInfo['model'] + "']" + name;
+
+		node.dataset.bind = bindInfo.type + ": " + ret;
+
+		return ret;
 	}
 
 	return s;
