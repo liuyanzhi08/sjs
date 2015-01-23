@@ -18,12 +18,19 @@ define(['tppl', 'events', 'helper'], function(tpl, events, helper) {
 
 			// Listen on model
 			var model = s.models[name];
-			// for (var prop in model) {
-			// 	events.on('update:' + name + '.' + prop, function() {
-			// 		render(name, prop);
-			// 	});
-			// }
-			
+			for (var prop in model) {
+				events.on('update:' + name + '.' + prop, function() {
+					var binds = document.querySelectorAll(BIND);
+					for (var i = 0, len = binds.length; i < len; i++) {
+						var node = binds[i];
+						var bindInfo = getBindInfo(node);
+						if (bindInfo.type == 'text') {
+							var value = eval(bindInfo.name);
+							node.innerHTML = value;
+						}
+					}
+				});
+			}
 		}
 	}
 
@@ -35,21 +42,21 @@ define(['tppl', 'events', 'helper'], function(tpl, events, helper) {
 	 */
 	s.model = function(name, properties) {
 		s.models[name] = {};
-	    for (var i in properties) {
-	        (function(i) {
-	            Object.defineProperty(s.models[name], i, {
+	    for (var prop in properties) {
+	        (function(prop) {
+	            Object.defineProperty(s.models[name], prop, {
 	                // Create a new getter for the property
 	                get: function () {
-	                    return properties[i];
+	                    return properties[prop];
 	                },
 	                // Create a new setter for the property
 	                set: function (val) {
-	                    properties[i] = val;
-	                    events.emit('update:' + name + '.' + i);
+	                    properties[prop] = val;
+	                    events.emit('update:' + name + '.' + prop);
 	                },
 	                enumerable: true
 	            })
-	        })(i);
+	        })(prop);
 	    }
 	    return s.models[name];
 	}

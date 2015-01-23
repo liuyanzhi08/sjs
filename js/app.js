@@ -39,6 +39,6 @@ define(['s'], function(s) {
 
 	s.init();
 	
-	test.blogs = 'yzl';	
+	test.id = '1';	
 })
 
