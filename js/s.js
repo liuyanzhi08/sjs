@@ -1,4 +1,4 @@
-define(['tppl', 'events', 'helper'], function(tpl, events, helper) {
+define(['events', 'helper'], function(events, helper) {
 	'use strict'
 
 	var BIND = '*[data-bind]';
