@@ -1,48 +1,48 @@
 <html>
-	<head></head>
-	<body>
-		<div data-bind="model: test">
-			<span data-bind="text: id"></span>
-			<span data-bind="text: name"></span><br>
-			
-			<p>Total blogs num:<span data-bind="text: blogsNum"></span></p>
-			<table>
-				<thead>
-					<tr>
-						<td>id</td>
-						<td>name</td>
-						<td>blog_id</td>
-						<td>blog_name</td>
-						<td>comments</td>
-					</tr>
-				</thead>
-				<tbody data-bind="foreach: blogs">
-					<tr>
-						<td data-bind="text: id"></td>
-						<td data-bind="text: name"></td>
-						<td data-bind="text: blogs-id"></td>
-						<td data-bind="text: blogs-name"></td>
-						<td>
-							<ul data-bind="foreach: blogs-comments">
-								<li>
-									<span>Total comments num:</span>
-									<span data-bind="text: blogs-commentsNum"></span><br>
+  <head></head>
+  <body>
+    <div data-bind="model: test">
+      <span data-bind="text: id"></span>
+      <span data-bind="text: name"></span><br>
+      
+      <p>Total blogs num:<span data-bind="text: blogsNum"></span></p>
+      <table>
+        <thead>
+          <tr>
+            <td>id</td>
+            <td>name</td>
+            <td>blog_id</td>
+            <td>blog_name</td>
+            <td>comments</td>
+          </tr>
+        </thead>
+        <tbody data-bind="foreach: blogs">
+          <tr>
+            <td data-bind="text: id"></td>
+            <td data-bind="text: name"></td>
+            <td data-bind="text: blogs-id"></td>
+            <td data-bind="text: blogs-name"></td>
+            <td>
+              <ul data-bind="foreach: blogs-comments">
+                <li>
+                  <span>Total comments num:</span>
+                  <span data-bind="text: blogs-commentsNum"></span><br>
 
-									<span data-bind="text: id"></span>
-									<span data-bind="text: name"></span><br>
+                  <span data-bind="text: id"></span>
+                  <span data-bind="text: name"></span><br>
 
-									<span data-bind="text: blogs-id"></span>
-									<span data-bind="text: blogs-name"></span><br>
+                  <span data-bind="text: blogs-id"></span>
+                  <span data-bind="text: blogs-name"></span><br>
 
-									<span data-bind="text: blogs-comments-id"></span>
-									<span data-bind="text: blogs-comments-name"></span>
-								</li>
-							</ul>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-		<script type="text/javascript" src="js/require.js" data-main="js/app.js"></script>
-	</body>
+                  <span data-bind="text: blogs-comments-id"></span>
+                  <span data-bind="text: blogs-comments-name"></span>
+                </li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <script type="text/javascript" src="js/require.js" data-main="js/app.js"></script>
+  </body>
 </html>
